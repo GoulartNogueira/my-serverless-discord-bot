@@ -5,7 +5,7 @@
 const { globalHandler } = require('../handler.js')
 
 exports.data = {
-  name: 'hello',
+  name: 'hallo',
   type: 1,
   description: 'replies with hello world.'
 }
