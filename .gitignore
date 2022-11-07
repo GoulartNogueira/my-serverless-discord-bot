@@ -4,3 +4,5 @@ samconfig.toml
 template.yaml
 .env
 .DS_Store
+**/node_modules
+*.zip
