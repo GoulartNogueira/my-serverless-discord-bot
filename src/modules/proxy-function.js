@@ -37,16 +37,21 @@ exports.handler = async (event) => {
 
   // Handle command (send to SNS and split to one of Lambdas)
   if (body.data.name) {
+    console.debug('Received command: ' + JSON.stringify(body.data.name));
     var eventText = JSON.stringify(body, null, 2);
+
+    var TOPIC = process.env.TOPIC_ARN;
+    console.debug('Publishing event to SNS topic: ' + TOPIC);
     var params = {
         Message: eventText,
         Subject: "Test SNS From Lambda",
-        TopicArn: process.env.TOPIC_ARN,
+        TopicArn: TOPIC,
         MessageAttributes: { "command": { DataType: 'String', StringValue: body.data.name } }
     };
+    console.debug('Params: ' + JSON.stringify(params));
     // Create promise and SNS service object
-    await new AWS.SNS({apiVersion: '2010-03-31'}).publish(params).promise();
-    
+    await new AWS.SNS({ apiVersion: '2010-03-31' }).publish(params).promise();
+    console.debug('Published to SNS');
     return {
       statusCode: 200,
       body: JSON.stringify({

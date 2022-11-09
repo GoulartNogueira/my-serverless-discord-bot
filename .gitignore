@@ -2,7 +2,7 @@ node_modules
 .aws-sam
 samconfig.toml
 template.yaml
-.env
+.env*
 .DS_Store
 **/node_modules
 *.zip
